@@ -6,7 +6,10 @@ import { fifaData } from './fifa.js';
 Practice accessing data by console.log-ing the following pieces of data note, you may want to filter the data first 😉*/
 
 //(a) Home Team name for 2014 world cup final
-
+const homeTeamWinner = fifaData.filter(function(winner){
+    return winner.Stage === 'Final' && winner.Year === 2014
+})
+console.log(homeTeamWinner[0]['Home Team Name']);
 //(b) Away Team name for 2014 world cup final
 
 //(c) Home Team goals for 2014 world cup final
@@ -43,6 +46,7 @@ function getYears(array, getFinalsCB) {
     const newArray = getFinalsCB(array).map(function(item){
         return item.Year;
     });
+    console.log(newArray);
     return newArray;
 }
 
@@ -81,9 +85,17 @@ Use the higher-order function getWinnersByYear to do the following:
 hint: the strings returned need to exactly match the string in step 4.
  */
 
-function getWinnersByYear(/* code here */) {
-    /* code here */
+function getWinnersByYear(array, getYearsCB, getWinnersCB) {
+
+   let years = getYearsCB(array, getFinals);
+   let country = getWinnersCB(array, getFinals);
+   let name = years.map(function(year, index){
+       return `In ${year}, ${country[index]} won the world cup!`;
+   })
+   console.log(name);
+   return name;
 }
+
 
 
 
